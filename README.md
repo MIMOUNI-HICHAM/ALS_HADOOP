@@ -2,9 +2,7 @@
 
 Ce projet implémente la **factorisation de matrice par l’algorithme Alternating Least Squares (ALS)** en **Hadoop MapReduce**. Il factorise une grande matrice `M` en deux matrices de plus petite dimension `W` et `H`, telles que :
 
-\[
-M \approx W H^\top
-\]
+M ≈ W × Hᵗ
 
 ## 🧠 Objectif
 
