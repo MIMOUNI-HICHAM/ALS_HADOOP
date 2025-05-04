@@ -1,30 +1,30 @@
-# 📊 ALS Matrix Factorization with Hadoop MapReduce
+# 📊 Factorisation de Matrice ALS avec Hadoop MapReduce
 
-This project implements **matrix factorization using the Alternating Least Squares (ALS)** algorithm in **Hadoop MapReduce**. It factorizes a large matrix `M` into two lower-dimensional matrices `W` and `H`, such that:
+Ce projet implémente la **factorisation de matrice par l’algorithme Alternating Least Squares (ALS)** en **Hadoop MapReduce**. Il factorise une grande matrice `M` en deux matrices de plus petite dimension `W` et `H`, telles que :
 
 \[
 M \approx W H^\top
 \]
 
-## 🧠 Goal
+## 🧠 Objectif
 
-Factorize a large matrix \( M \in \mathbb{R}^{10000 \times 512} \) into:
+Factoriser une matrice de grande dimension \( M \in \mathbb{R}^{10000 \times 512} \) en :
 
 - \( W \in \mathbb{R}^{10000 \times k} \)
 - \( H \in \mathbb{R}^{512 \times k} \)
 
-using ALS in MapReduce. This technique is widely used in **recommendation systems** (e.g. Netflix, Amazon).
+en utilisant l’algorithme ALS en MapReduce. Cette méthode est largement utilisée dans les **systèmes de recommandation** (comme Netflix, Amazon).
 
 ---
 
-## 📁 Project Structure
+## 📁 Structure du projet
 
 ```
 
 ALS-Matrix-Factorization-Hadoop/
 ├── README.md
-├── matrix.txt                  # Example generated matrix
-├── GenerateMatrix.java         # Java code to generate matrix
+├── matrix.txt                  # Matrice générée en exemple
+├── GenerateMatrix.java         # Code Java pour générer la matrice
 ├── src/
 │   ├── ALSDriver.java
 │   ├── MatrixLineMapper.java
@@ -38,50 +38,50 @@ ALS-Matrix-Factorization-Hadoop/
 ├── output\_examples/
 │   ├── output\_h/part-r-00000
 │   └── output\_w/part-r-00000
-└── build.sh                   # Optional build helper
+└── build.sh                   # Script de compilation (optionnel)
 
 ````
 
 ---
 
-## 🛠️ Usage Instructions
+## 🛠️ Instructions d’utilisation
 
-### 1. Compile Java classes
+### 1. Compiler les classes Java
 
 ```bash
 bash build.sh
 ````
 
-Or manually:
+Ou manuellement :
 
 ```bash
 mkdir -p build
 javac -classpath $(hadoop classpath) -d build src/*.java src/util/*.java
 ```
 
-### 2. Generate the matrix M
+### 2. Générer la matrice M
 
 ```bash
 javac GenerateMatrix.java
 java GenerateMatrix > matrix.txt
 ```
 
-Then upload to HDFS:
+Puis l’envoyer dans HDFS :
 
 ```bash
 hdfs dfs -mkdir /user/matrix
 hdfs dfs -put matrix.txt /user/matrix/
 ```
 
-### 3. Run MapReduce jobs
+### 3. Lancer les jobs MapReduce
 
-You will run:
+Les étapes sont :
 
-* Job 1: Generate W (random or optimized)
-* Job 2: Estimate H from W and M
-* Repeat alternatingly
+* Étape 1 : Générer W (aléatoire ou optimisé)
+* Étape 2 : Estimer H à partir de W et M
+* Répéter alternativement
 
-To run the driver:
+Pour exécuter le driver :
 
 ```bash
 hadoop jar build ALSDriver input_path output_path
@@ -89,33 +89,33 @@ hadoop jar build ALSDriver input_path output_path
 
 ---
 
-## 🔁 ALS Iterations
+## 🔁 Itérations ALS
 
-Alternate the steps:
+Les étapes alternent :
 
-1. Fix H, recompute W
-2. Fix W, recompute H
+1. Fixer H, recalculer W
+2. Fixer W, recalculer H
 
-Repeat for `MAX_ITER` iterations.
-
----
-
-## 📊 Output Example
-
-Example outputs are stored in:
-
-```
-output_examples/output_w/part-r-00000  # Matrix W (10000 x k)
-output_examples/output_h/part-r-00000  # Matrix H (512 x k)
-```
-
-Each line: `rowIndex val1,val2,...,valk`
+Répéter pendant `MAX_ITER` itérations.
 
 ---
 
-## 🧪 Evaluation
+## 📊 Exemple de sortie
 
-Use a Python script to evaluate RMSE or reconstruct M:
+Les résultats sont stockés dans :
+
+```
+output_examples/output_w/part-r-00000  # Matrice W (10000 x k)
+output_examples/output_h/part-r-00000  # Matrice H (512 x k)
+```
+
+Chaque ligne : `index_ligne val1,val2,...,valk`
+
+---
+
+## 🧪 Évaluation
+
+Utiliser un script Python pour reconstruire M ou calculer l’erreur RMSE :
 
 ```python
 import numpy as np
@@ -126,6 +126,8 @@ M_approx = W @ H.T
 
 ---
 
-## 📌 Author
+## 📌 Auteur
 
-Made as part of a university project in Big Data Engineering.
+Réalisé dans le cadre d’un projet universitaire en ingénierie Big Data.
+
+**Auteur** : HICHAM
