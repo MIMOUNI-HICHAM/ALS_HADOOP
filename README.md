@@ -6,10 +6,11 @@ M ≈ W × Hᵗ
 
 ## 🧠 Objectif
 
-Factoriser une matrice de grande dimension \( M \in \mathbb{R}^{10000 \times 512} \) en :
+Factoriser une matrice de grande dimension :
 
-- \( W \in \mathbb{R}^{10000 \times k} \)
-- \( H \in \mathbb{R}^{512 \times k} \)
+- M ∈ ℝ¹⁰⁰⁰⁰ˣ⁵¹²
+- W ∈ ℝ¹⁰⁰⁰⁰ˣᵏ
+- H ∈ ℝ⁵¹²ˣᵏ
 
 en utilisant l’algorithme ALS en MapReduce. Cette méthode est largement utilisée dans les **systèmes de recommandation** (comme Netflix, Amazon).
 
@@ -103,8 +104,8 @@ Répéter pendant `MAX_ITER` itérations.
 Les résultats sont stockés dans :
 
 ```
-output_examples/output_w/part-r-00000  # Matrice W (10000 x k)
-output_examples/output_h/part-r-00000  # Matrice H (512 x k)
+output_examples/output_w/part-r-00000  # Matrice W (10000 × k)
+output_examples/output_h/part-r-00000  # Matrice H (512 × k)
 ```
 
 Chaque ligne : `index_ligne val1,val2,...,valk`
