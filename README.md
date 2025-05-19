@@ -80,8 +80,7 @@ Les étapes sont :
 * Étape 2 : Estimer H à partir de W et M
 * Répéter alternativement
 
-Pour exécuter le driver :
-
+exucutement de driver avec :
 ```bash
 hadoop jar build ALSDriver input_path output_path
 ```
